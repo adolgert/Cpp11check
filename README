@@ -1,3 +1,48 @@
-This is uses SCons, an equivalent of Make, to look for
+This uses SCons, an equivalent of Make, to look for
 C++11 features in your C++ compiler. Edit local.cfg
 to specify a compiler other than gcc.
+
+-bash-3.2$ scons
+scons: Reading SConscript files ...
+INFO:SconsRoot:running with -j 2
+Checking whether the C++ compiler worksyes
+Checking for c++0x conformance...-std=c++11?...-std=c++0x?...yes
+Checking snippet alias templates...no
+Checking snippet alternative function syntax...no
+Checking snippet explicit final...no
+Checking snippet explicit override...no
+Checking snippet explicitly defaulted special member functions...no
+Checking snippet explicitly deleted member functions...no
+Checking snippet generalized_constant...no
+Checking snippet hash tables...no
+Checking snippet initializer lists...no
+Checking snippet lambda functions...yes
+Checking snippet long long int...yes
+Checking snippet new string literals...no
+Checking snippet nullptr...no
+Checking snippet object construction constructors calling constructors...no
+Checking snippet object construction improvement using base constructor...no
+Checking snippet polymorphic wrappers for function objects...no
+Checking snippet random numbers...no
+Checking snippet range-based for-loop...no
+Checking snippet regex...no
+Checking snippet right angle brackets...yes
+Checking snippet shared_ptr...no
+Checking snippet sizeof on member objects...no
+Checking snippet static_assert...no
+Checking snippet strongly-typed enum...no
+Checking snippet templates with variable number of values...no
+Checking snippet tuple...no
+Checking snippet type inference auto...yes
+Checking snippet type inference decltype...yes
+Checking snippet type traits metaprogramming...no
+Checking snippet uniform initialization...no
+Checking snippet unrestricted unions...no
+Checking snippet user-defined literals...no
+Checking snippet using syntax instead of typedefs...no
+Checking snippet wrapper reference...no
+scons: done reading SConscript files.
+scons: Building targets ...
+scons: `.' is up to date.
+scons: done building targets.
+Build succeeded.
