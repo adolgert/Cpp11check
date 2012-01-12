@@ -1,0 +1,3 @@
+This is uses SCons, an equivalent of Make, to look for
+C++11 features in your C++ compiler. Edit local.cfg
+to specify a compiler other than gcc.
