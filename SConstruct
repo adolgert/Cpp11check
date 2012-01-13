@@ -52,7 +52,7 @@ except:
     file_cpu=1
 num_cpu=int(os.environ.get('NUM_CPU',file_cpu))
 SetOption('num_jobs', num_cpu)
-logger.info('running with -j %d' % int(GetOption('num_jobs')))
+logger.info('running with %d threads' % int(GetOption('num_jobs')))
 
 AddOption('--echo', dest='echo', action='store_true',default=False,
           help='This echoes what scons runs as tests in order to debug failed builds.')
@@ -68,9 +68,10 @@ if not (cpp_compiler and c_compiler):
     SConsCheck.latest_gcc(env)
 if cpp_compiler:
     env['CXX']=cpp_compiler
-if c_compiler:
-    env['CC']=cpp_compiler
+else:
+    cpp_compiler=env['CXX']
 
+logger.info('Testing C++ compiler: %s' % (cpp_compiler or 'default'))
 
 def DisallowSubst():
     #AllowSubstExceptions()

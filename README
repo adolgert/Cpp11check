@@ -1,7 +1,17 @@
-This uses SCons, an equivalent of Make, to look for
-C++11 features in your C++ compiler. Edit local.cfg
-to specify a compiler other than gcc.
+This uses SCons (www.scons.org), an equivalent of Make,
+to look for C++11 features in your C++ compiler.
 
+Pick a compiler by editing local.cfg.
+cpp_compiler=/opt/gcc-4.3.1/bin/g++
+
+See what is compiled by running with --echo.
+$ scons --echo
+
+If scons is caching results, and you want to see them,
+remove its temporary files and run again.
+$ rm -rf .scon*
+
+Sample output:
 -bash-3.2$ scons
 scons: Reading SConscript files ...
 INFO:SconsRoot:running with -j 2
