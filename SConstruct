@@ -196,9 +196,9 @@ auto SomeStruct::func_name(int x, int y) -> int {
     return x + y;
 }
 int main(int argc, char* argv[]) {
-    double res = adding_func(3.0+4.7);
+    double res = adding_func(3.0,4.7);
     SomeStruct s;
-    double res = s.func_name(3.7,4.2);
+    double other = s.func_name(3.7,4.2);
   return 0;
 }
 '''
@@ -212,8 +212,8 @@ public:
     SomeType() : SomeType(42) {}
 };
 int main(int argc, char* argv[]) {
-    SomeType s;
-    SomeType s(37);
+    SomeType bare;
+    SomeType with_argument(37);
   return 0;
 }
 '''
@@ -271,7 +271,7 @@ cpp_tests['nullptr']= '''
 void foo(char* howdy) { if (howdy) howdy[0]='c'; }
 int main(int argc, char* argv[]) {
     char *pc = nullptr;
-    int *pc = nullptr;
+    int *ic = nullptr;
     bool b = nullptr;
     foo(nullptr);
   return 0;
@@ -380,8 +380,9 @@ int main(int argc, char* argv[]) {
 
 cpp_tests['explicitly defaulted special member functions']= '''
 struct SomeType {
+    int val_;
     SomeType() = default; //The default constructor is explicitly stated.
-    SomeType(OtherType value) {};
+    SomeType(int value) : val_(value){};
 };
 int main(int argc, char* argv[]) {
     SomeType s;
@@ -413,6 +414,7 @@ int main(int argc, char* argv[]) {
 
 
 cpp_tests['static_assert']= '''
+#include <memory>
 int main(int argc, char* argv[]) {
     static_assert(sizeof(size_t)==sizeof(int*), "pointer and size_t do not match");
   return 0;
@@ -421,11 +423,12 @@ int main(int argc, char* argv[]) {
 
 
 cpp_tests['sizeof on member objects']= '''
+#include <memory>
 struct SomeType {
     float member;
 };
 int main(int argc, char* argv[]) {
-    size_t b = sizeof(SomeType::member);
+   size_t  b = sizeof(SomeType::member);
   return 0;
 }
 '''
@@ -441,7 +444,7 @@ int main(int argc, char* argv[]) {
 
 
 cpp_tests['hash tables']= '''
-#include <unordered_set>;
+#include <unordered_set>
 int main(int argc, char* argv[]) {
     std::unordered_set s;
   return 0;
@@ -477,6 +480,8 @@ int main(int argc, char* argv[]) {
 
 
 cpp_tests['wrapper reference']= '''
+#include <iostream>
+#include <functional>
 // This function will obtain a reference to the parameter 'r' and increment it.
 void f (int &r)  { r++; }
  
@@ -493,11 +498,14 @@ int main()
     g (f, std::ref(i));  // 'g<void(int &r),reference_wrapper<int>>' is instantiated
                     // then 'i' will be modified.
     std::cout << i << std::endl;  // Output -> 1
+    return 0;
 }
 '''
 
 
 cpp_tests['polymorphic wrappers for function objects']= '''
+#include <algorithm>
+#include <functional>
 int main(int argc,char* argv[]) {
 std::function<int (int, int)> func;  // Wrapper creation using
                                  // template class 'function'.
